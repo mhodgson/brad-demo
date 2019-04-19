@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "jade index.jade",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "sass index.sass > index.css",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scrape": "node ./scrape.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chromeless": "^1.5.2",
-    "scrape-it": "^5.1.4"
+    "puppeteer": "^1.14.0",
+    "request-promise-native": "^1.0.7",
+    "sass": "^1.19.0"
   }
 }

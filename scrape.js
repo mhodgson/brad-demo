@@ -1,44 +1,44 @@
-const scrapeIt = require("scrape-it");
-const { Chromeless } = require("chromeless");
+const puppeteer = require("puppeteer");
+const request = require("request-promise-native");
 
-const chromeless = new Chromeless();
+(async () => {
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
 
-chromeless
-  .setUserAgent(
-    "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"
-  )
-  .clearCookies()
-  .goto("https://api.ussquash.com/login")
-  .type("bmosier", 'input[name="username"]')
-  .type("thunder7", 'input[name="password"]')
-  .click('button[type="submit"]')
-  .wait(".start-screen")
-  .goto("https://clublocker.com/reservations/club-admin")
-  .wait(".admin-view-container")
-  .click("table tr:first-child a")
-  .click('a[active-if-screen="members"]')
-  .wait(5000)
-  .html()
-  .then(html => {
-    data = scrapeIt.scrapeHTML(html, {
-      data: {
-        listItem: 'div[role="row"]',
-        data: {
-          firstName: {
-            selector: 'div[role="gridcell"]',
-            eq: 0
-          },
-          lastName: {
-            selector: 'div[role="gridcell"]',
-            eq: 1
-          },
-          rating: {
-            selector: 'div[role="gridcell"]',
-            eq: 5
-          }
-        }
-      }
+  await page.goto("https://api.ussquash.com/login");
+
+  await page.type('input[name="username"]', "bmosier");
+  await page.type('input[name="password"]', "thunder7");
+  await page.click('button[type="submit"]');
+
+  await page.waitFor(".start-screen");
+  await page.goto("https://clublocker.com/reservations/club-admin");
+
+  const data = await page.evaluate(async () => {
+    var url =
+      "https://api.ussquash.com/resources/res/clubs/1392/members?PageNumber=1&RowsPerPage=1000";
+
+    return await new Promise((resolve, reject) => {
+      $.ajax({
+        url: url,
+        success: resolve,
+        error: reject
+      });
     });
-
-    console.log(data);
   });
+
+  data.forEach(member => {
+    console.log(`${member.firstName} ${member.lastName}: ${member.rating}`);
+  });
+
+  const postUrl = "https://webhook.site/91af82ad-55d3-42b9-9db7-ad08b51d888d";
+  // const postUrl = "http://www.eqsquashswc.com/uploadMemberData.php";
+
+  const response = await request.post(postUrl, {
+    json: data
+  });
+
+  console.log(response);
+
+  await browser.close();
+})();
