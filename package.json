@@ -12,8 +12,5 @@
   "dependencies": {
     "chromeless": "^1.5.2",
     "scrape-it": "^5.1.4"
-  },
-  "devDependencies": {
-    "jade": "^1.11.0"
   }
 }
