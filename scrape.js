@@ -31,8 +31,8 @@ const request = require("request-promise-native");
     console.log(`${member.firstName} ${member.lastName}: ${member.rating}`);
   });
 
-  const postUrl = "https://webhook.site/91af82ad-55d3-42b9-9db7-ad08b51d888d";
-  // const postUrl = "http://www.eqsquashswc.com/uploadMemberData.php";
+  // const postUrl = "https://webhook.site/91af82ad-55d3-42b9-9db7-ad08b51d888d";
+  const postUrl = "http://www.eqsquashswc.com/uploadMemberData.php";
 
   const response = await request.post(postUrl, {
     json: data
