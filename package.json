@@ -1,0 +1,19 @@
+{
+  "name": "scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "jade index.jade",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chromeless": "^1.5.2",
+    "scrape-it": "^5.1.4"
+  },
+  "devDependencies": {
+    "jade": "^1.11.0"
+  }
+}
