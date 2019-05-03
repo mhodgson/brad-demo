@@ -1,0 +1,36 @@
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+service: ratings-scraper
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  profile: brad-squash
+  runtime: nodejs8.10
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-chrome
+
+package:
+  exclude:
+    - node_modules/puppeteer/.local-chromium/**
+
+# The `functions` block defines what code to deploy
+functions:
+  scrape:
+    handler: handler.scrape
+    memorySize: 1024
+    timeout: 60
+    # The `events` block defines how to trigger the handler.scrape code
+    events:
+      - http:
+          path: scrape
+          method: get
+          cors: true
+      - schedule: rate(12 hours)
