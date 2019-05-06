@@ -11,12 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@serverless-chrome/lambda": "^1.0.0-55",
-    "chrome-launcher": "^0.10.7",
-    "puppeteer": "^1.14.0",
+    "chrome-aws-lambda": "^1.15.1",
+    "puppeteer-core": "^1.15.0",
     "sass": "^1.19.0",
     "serverless-offline": "^4.9.4",
-    "serverless-plugin-chrome": "^1.0.0-55",
     "superagent": "^5.0.5"
   }
 }

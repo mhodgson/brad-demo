@@ -15,17 +15,12 @@ provider:
 
 plugins:
   - serverless-offline
-  - serverless-plugin-chrome
-
-package:
-  exclude:
-    - node_modules/puppeteer/.local-chromium/**
 
 # The `functions` block defines what code to deploy
 functions:
   scrape:
     handler: handler.scrape
-    memorySize: 1024
+    memorySize: 1536
     timeout: 60
     # The `events` block defines how to trigger the handler.scrape code
     events:
