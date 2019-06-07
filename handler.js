@@ -40,8 +40,7 @@ module.exports.scrape = async (event, context) => {
 
     data = data.filter(member => member.firstName !== undefined);
 
-    const postUrl = "https://webhook.site/b8614e02-012c-484d-a453-432cc64314b6";
-    // const postUrl = "http://www.eqsquashswc.com/uploadMemberData.php";
+    const postUrl = "http://eqsquashswc.com/uploadMemberData.php";
 
     response = await request.post(postUrl).send(data);
   } catch (error) {
