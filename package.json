@@ -14,7 +14,7 @@
     "chrome-aws-lambda": "^1.15.1",
     "puppeteer-core": "^1.15.0",
     "sass": "^1.19.0",
-    "serverless-offline": "^4.9.4",
+    "serverless-offline": "^12.0.3",
     "superagent": "^5.0.5"
   }
 }
